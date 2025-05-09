@@ -1,172 +1,114 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quyết Định Công Tác</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      font-size: 13px;
-      color: #000;
-      background-color: #fff;
-      padding: 20px;
-    }
-    h2, h3, h4 {
-      text-align: center;
-      margin: 4px 0;
-      font-weight: bold;
-    }
-    .form-container {
-      max-width: 850px;
-      margin: auto;
-      border: 1px solid #ccc;
-      padding: 20px;
-      background-color: #fff;
-    }
-    .form-grid, .route-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 10px;
-      align-items: center;
-    }
-    .form-grid label,
-    .route-grid label {
-      font-weight: bold;
-      margin-bottom: 2px;
-    }
-    input, select, textarea {
-      font-size: 13px;
-      padding: 4px 6px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .route {
-      border: 2px dashed #2e7d32;
-      padding: 12px;
-      margin-bottom: 10px;
-      background-color: #e6f4ea;
-      border-radius: 8px;
-    }
-    .sub-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 10px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 4px 6px;
-      text-align: center;
-      font-size: 13px;
-    }
-    button {
-      padding: 6px 12px;
-      font-size: 13px;
-      margin-top: 10px;
-    }
-  </style>
-  <script>
-    let routeCount = 1;
-
-    function calculateDays() {
-      const routes = document.querySelectorAll('.route');
-      let totalDays = 0;
-      routes.forEach(route => {
-        const start = route.querySelector('[name^="depart-"]').value;
-        const end = route.querySelector('[name^="return-"]').value;
-        const dayBox = route.querySelector('.day-count');
-        if (start && end) {
-          const startDate = new Date(start);
-          const endDate = new Date(end);
-          const diffTime = endDate - startDate;
-          const days = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-          if (days > 0) {
-            totalDays += days;
-            if (dayBox) dayBox.value = days;
-          }
-        }
-      });
-      document.getElementById('total-days').innerText = totalDays;
-    }
-
-    function calculateCosts() {
-      let total = 0;
-      const rows = document.querySelectorAll('table tbody tr');
-      rows.forEach(row => {
-        const qty = row.querySelector('input[data-role="qty"]');
-        const price = row.querySelector('input[data-role="price"]');
-        const totalCell = row.querySelector('input[data-role="subtotal"]');
-        if (qty && price && totalCell) {
-          const subtotal = parseInt(qty.value || 0) * parseInt(price.value || 0);
-          totalCell.value = subtotal;
-          total += subtotal;
-        }
-      });
-      document.getElementById('total-cost').innerText = total.toLocaleString('vi-VN');
-    }
-
-    function addRoute() {
-      routeCount++;
-      const newDiv = document.createElement('div');
-      newDiv.className = 'route';
-      newDiv.innerHTML = `
-        <h4>Lộ trình ${routeCount}</h4>
-        <div class="route-grid">
-          <label>Lộ trình:</label>
-          <select name="route-name-${routeCount}" required>
-            <option value="Bac Ninh - HAN">Bac Ninh - HAN</option>
-            <option value="Da Nang - SGN">Da Nang - SGN</option>
-            <option value="HCM - Ha Long">HCM - Ha Long</option>
-          </select>
-
-          <label>Phương tiện:</label>
-          <select name="transport-${routeCount}" required>
-            <option value="Xe khách">Xe khách</option>
-            <option value="Máy bay">Máy bay</option>
-            <option value="Tàu hỏa">Tàu hỏa</option>
-            <option value="Xe công ty">Xe công ty</option>
-          </select>
-
-          <label>Giờ đi:</label>
-          <input type="time" name="depart-time-${routeCount}" required>
-
-          <label>Ngày đi:</label>
-          <input type="date" name="depart-${routeCount}" required>
-
-          <label>Giờ về:</label>
-          <input type="time" name="return-time-${routeCount}" required>
-
-          <label>Ngày về:</label>
-          <input type="date" name="return-${routeCount}" required>
-
-          <label>Số ngày công tác:</label>
-          <input type="number" class="day-count" name="days-${routeCount}" readonly>
-        </div>`;
-      document.getElementById('routes').appendChild(newDiv);
-    }
-
-    document.addEventListener('input', () => {
-      calculateDays();
-      calculateCosts();
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('add-route').addEventListener('click', addRoute);
-      calculateCosts();
-    });
-  </script>
-</head>
 <body>
-<!-- Phần thân form giữ nguyên -->
+  <div class="form-container">
+    <h2>CÔNG TY CỔ PHẦN KEM AN MINH</h2>
+    <h3>Mẫu số: HR_QDCT 2023_01</h3>
+    <h4>QUYẾT ĐỊNH CÔNG TÁC</h4>
+
+    <form id="work-form">
+      <div class="form-grid">
+        <label>Mã Nhân Viên:</label>
+        <input type="text" name="employee-id" required>
+        <label>Bộ Phận:</label>
+        <input type="text" name="department" required>
+        <label>Chức Vụ:</label>
+        <input type="text" name="position" required>
+      </div>
+
+      <div class="form-grid">
+        <label>Người Đề Nghị:</label>
+        <input type="text" name="requester" required>
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <label>Ngày Đề Nghị:</label>
+        <input type="date" name="request-date" required>
+      </div>
+
+      <label>Email Người Duyệt (cách nhau bởi dấu ','):</label>
+      <input type="text" name="approver-email" required>
+
+      <label>Mục Đích:</label>
+      <input type="text" name="purpose" required>
+
+      <label>Loại công tác:</label>
+      <select name="work-type" required>
+        <option value="short-term">Công tác ngắn ngày</option>
+        <option value="long-term">Công tác dài ngày</option>
+      </select>
+
+      <h3>Kế Hoạch Công Tác</h3>
+      <div id="routes">
+        <div class="route">
+          <h4>Lộ trình 1</h4>
+          <div class="route-grid">
+            <label>Lộ trình:</label>
+            <select name="route-name-1" required>
+              <option value="Bac Ninh - HAN">Bac Ninh - HAN</option>
+              <option value="Da Nang - SGN">Da Nang - SGN</option>
+              <option value="HCM - Ha Long">HCM - Ha Long</option>
+            </select>
+
+            <label>Phương tiện:</label>
+            <select name="transport-1" required>
+              <option value="Xe khách">Xe khách</option>
+              <option value="Máy bay">Máy bay</option>
+              <option value="Tàu hỏa">Tàu hỏa</option>
+              <option value="Xe công ty">Xe công ty</option>
+            </select>
+
+            <label>Giờ đi:</label>
+            <input type="time" name="depart-time-1" required>
+
+            <label>Ngày đi:</label>
+            <input type="date" name="depart-1" required>
+
+            <label>Giờ về:</label>
+            <input type="time" name="return-time-1" required>
+
+            <label>Ngày về:</label>
+            <input type="date" name="return-1" required>
+
+            <label>Số ngày công tác:</label>
+            <input type="number" class="day-count" name="days-1" readonly>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" id="add-route">Thêm Lộ Trình</button>
+
+      <label>Yêu cầu khác:</label>
+      <textarea name="other-request" rows="3"></textarea>
+
+      <h4>Tổng số ngày công tác: <span id="total-days">0</span> ngày</h4>
+
+      <h3>Chi Phí Dự Kiến</h3>
+      <div class="cost-section">
+        <label>Giá vé phương tiện 1</label>
+        <input type="number" value="1" data-role="qty">
+        <input type="number" value="230000" data-role="price">
+        <input type="number" value="230000" data-role="subtotal" disabled>
+      </div>
+      <div class="cost-section">
+        <label>Khách sạn</label>
+        <input type="number" value="0" data-role="qty">
+        <input type="number" value="0" data-role="price">
+        <input type="number" value="0" data-role="subtotal" disabled>
+      </div>
+      <div class="cost-section">
+        <label>Phụ cấp công tác phí</label>
+        <input type="number" value="0" data-role="qty">
+        <input type="number" value="0" data-role="price">
+        <input type="number" value="0" data-role="subtotal" disabled>
+      </div>
+      <div class="cost-section">
+        <label>Chi phí khác</label>
+        <input type="number" value="0" data-role="qty">
+        <input type="number" value="0" data-role="price">
+        <input type="number" value="0" data-role="subtotal" disabled>
+      </div>
+
+      <h4>Tổng Chi Phí Dự Kiến: <span id="total-cost">0</span> VNĐ</h4>
+
+      <button type="submit">Gửi</button>
+    </form>
+  </div>
 </body>
-</html>
