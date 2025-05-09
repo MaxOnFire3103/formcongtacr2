@@ -1,6 +1,38 @@
 <body>
   <div class="form-container" style="max-width: 850px; margin: auto; padding: 24px; background-color: #f1f8f4; border: 2px dashed #4caf50; border-radius: 8px; font-family: Tahoma, sans-serif; font-size: 13px;">
-    <h2 style="text-align:center; color:#2e7d32; margin-bottom: 8px;">CÔNG TY CỔ PHẦN KEM AN MINH</h2>
+   <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px;">
+  <img id="company-logo" src="logo-swensens.png" alt="Logo" style="height: 60px;">
+  <select id="company-name" onchange="updateCompanyInfo(this.value)" style="font-weight: bold; font-size: 15px; border: none; outline: none; background: transparent;">
+    <option value="swensens">CÔNG TY CỔ PHẦN KEM AN MINH</option>
+    <option value="pizza">CÔNG TY CỔ PHẦN PIZZA NGON</option>
+    <option value="dq">CÔNG TY CỔ PHẦN DQ VIỆT NAM</option>
+    <option value="aka">CÔNG TY CỔ PHẦN AKA HOUSE</option>
+    <option value="chang">CÔNG TY TNHH CHANG THAI CUISINE</option>
+  </select>
+</div>
+<script>
+  function updateCompanyInfo(value) {
+    const logoMap = {
+      swensens: 'logo-swensens.png',
+      pizza: 'logo-pizza.png',
+      dq: 'logo-dq.png',
+      aka: 'logo-aka.png',
+      chang: 'logo-chang.png'
+    };
+    const nameMap = {
+      swensens: 'CÔNG TY CỔ PHẦN KEM AN MINH',
+      pizza: 'CÔNG TY CỔ PHẦN PIZZA NGON',
+      dq: 'CÔNG TY CỔ PHẦN DQ VIỆT NAM',
+      aka: 'CÔNG TY CỔ PHẦN AKA HOUSE',
+      chang: 'CÔNG TY TNHH CHANG THAI CUISINE'
+    };
+    document.getElementById('company-logo').src = logoMap[value];
+    document.getElementById('company-name').innerHTML =
+      `<option value=\"${value}\" selected>${nameMap[value]}</option>` +
+      Object.entries(nameMap).filter(([k]) => k !== value).map(([k, v]) => `<option value=\"${k}\">${v}</option>`).join('');
+  }
+</script>
+
     <h3 style="text-align:center; font-weight:bold; margin: 4px 0;">Mẫu số: HR_QDCT 2023_01</h3>
     <h4 style="text-align:center; font-weight:bold; color:#2e7d32; margin-bottom: 16px;">QUYẾT ĐỊNH CÔNG TÁC</h4>
 
