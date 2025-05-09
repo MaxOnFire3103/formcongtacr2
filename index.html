@@ -30,11 +30,11 @@
       <input type="text" name="approver-email" required>
 
       <label>Mục Đích:</label>
-      <input type="text" name="purpose" required>
+<input type="text" name="purpose" required>
 
-      <div class="form-grid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px; align-items:center;">
-  <label style="grid-column: span 1;">Loại công tác:</label>
-  <select style="grid-column: span 2;" name="work-type" required>
+<div style="margin-top: 10px;">
+  <label style="font-weight: bold; display: inline-block; margin-bottom: 6px;">Loại công tác:</label>
+  <select name="work-type" required style="width: 200px; padding: 4px 6px;">
     <option value="short-term">Công tác ngắn ngày</option>
     <option value="long-term">Công tác dài ngày</option>
   </select>
@@ -114,6 +114,20 @@
       <h4 style="margin-top: 12px;">Tổng Chi Phí Dự Kiến: <span id="total-cost">0</span> VNĐ</h4>
 
       <button type="submit" style="margin-top: 16px;">Gửi</button>
-    </form>
+    <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end;">
+  <div style="text-align: center;">
+    <p><strong>Người đề nghị</strong></p>
+    <p style="font-style: italic; font-size: 12px;">(Chữ ký số/Chữ ký tay)</p>
+    <div style="height: 60px;"></div>
+    <p>........................................</p>
+  </div>
+  <div style="text-align: center;">
+    <p><strong>Người duyệt</strong></p>
+    <p style="font-style: italic; font-size: 12px;">(Chữ ký số/Chữ ký tay)</p>
+    <div style="height: 60px;"></div>
+    <p>........................................</p>
+  </div>
+</div>
+</form>
   </div>
 </body>
