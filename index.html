@@ -1,12 +1,95 @@
-window.addEventListener('DOMContentLoaded', () => {
-  calculateDays();
-  calculateCosts();
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Quyết định công tác</title>
+</head>
 
-  // Gắn listener trực tiếp vào các input ngày
-  const dateInputs = document.querySelectorAll('input[type="date"]');
-  dateInputs.forEach(input => {
-    input.addEventListener('change', () => {
-      calculateDays();
-    });
-  });
-});
+<body>
+  <div class="form-container" style="max-width: 850px; margin: auto; padding: 24px; background-color: #ffffff; border: 2px solid #ccc; border-radius: 12px; font-family: Tahoma, sans-serif; font-size: 13px;">
+    <div style="display: flex; align-items: center; gap: 12px; justify-content: center; margin-bottom: 10px;">
+      <img id="company-logo" src="logo-swensens.png" alt="Logo" style="height: 60px;">
+      <select id="company-name" onchange="updateCompanyInfo(this.value)" style="font-weight: bold; font-size: 15px; border: 1px solid #ccc; padding: 4px 8px;">
+        <option value="swensens">CÔNG TY CỔ PHẦN KEM AN MINH</option>
+        <option value="pizza">CÔNG TY CỔ PHẦN PIZZA NGON</option>
+        <option value="dq">CÔNG TY CỔ PHẦN DQ VIỆT NAM</option>
+        <option value="aka">CÔNG TY CỔ PHẦN AKA HOUSE</option>
+        <option value="chang">CÔNG TY TNHH CHANG THAI CUISINE</option>
+      </select>
+    </div>
+    <div style="text-align: center; font-weight: bold; font-size: 14px; margin-bottom: 6px;">Mẫu số: HR_QDCT 2023_01</div>
+
+    <script>
+      function updateCompanyInfo(value) {
+        const logoMap = {
+          swensens: 'logo-swensens.png',
+          pizza: 'logo-pizza.png',
+          dq: 'logo-dq.png',
+          aka: 'logo-aka.png',
+          chang: 'logo-chang.png'
+        };
+        const nameMap = {
+          swensens: 'CÔNG TY CỔ PHẦN KEM AN MINH',
+          pizza: 'CÔNG TY CỔ PHẦN PIZZA NGON',
+          dq: 'CÔNG TY CỔ PHẦN DQ VIỆT NAM',
+          aka: 'CÔNG TY CỔ PHẦN AKA HOUSE',
+          chang: 'CÔNG TY TNHH CHANG THAI CUISINE'
+        };
+        document.getElementById('company-logo').src = logoMap[value];
+        document.getElementById('company-name').innerHTML = `<option value="${value}" selected>${nameMap[value]}</option>` +
+          Object.entries(nameMap).filter(([k]) => k !== value).map(([k, v]) => `<option value="${k}">${v}</option>`).join('');
+      }
+    </script>
+
+    <!-- Tính ngày công tác -->
+    <script>
+      function calculateDays() {
+        const routes = document.querySelectorAll('.route');
+        let total = 0;
+        routes.forEach(route => {
+          const start = route.querySelector('input[name*="depart"]');
+          const end = route.querySelector('input[name*="return"]');
+          const dayBox = route.querySelector('.day-count');
+          if (start && end && start.value && end.value) {
+            const d1 = new Date(start.value);
+            const d2 = new Date(end.value);
+            const diff = Math.floor((d2 - d1) / (1000 * 60 * 60 * 24)) + 1;
+            if (diff > 0) {
+              dayBox.value = diff;
+              total += diff;
+            }
+          }
+        });
+        document.getElementById('total-days').innerText = total;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        calculateDays();
+        document.body.addEventListener('input', calculateDays);
+        document.body.addEventListener('change', calculateDays);
+
+        const addBtn = document.getElementById('add-route');
+        if (addBtn) {
+          addBtn.addEventListener('click', () => {
+            const container = document.getElementById('routes');
+            const count = container.querySelectorAll('.route').length + 1;
+            const div = document.createElement('div');
+            div.className = 'route';
+            div.style.marginBottom = '16px';
+            div.innerHTML = `
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                <label>Ngày đi:</label><input type="date" name="depart-${count}">
+                <label>Ngày về:</label><input type="date" name="return-${count}">
+                <label>Số ngày:</label><input type="number" class="day-count" name="days-${count}" readonly>
+              </div>
+            `;
+            container.appendChild(div);
+            calculateDays();
+          });
+        }
+      });
+    </script>
+  </div>
+</body>
+
+</html>
