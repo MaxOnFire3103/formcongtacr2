@@ -1,0 +1,19 @@
+body {
+  font-family: sans-serif;
+  background-color: #f5f5f5;
+  padding: 40px;
+}
+.form-container {
+  background: #e6f4ea;
+  border: 2px dashed #2e7d32;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: auto;
+}
+.route {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
