@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Form Quyết định công tác</title>
-</head>
+window.addEventListener('DOMContentLoaded', () => {
+  calculateDays();
+  calculateCosts();
 
-<body>
-  <div class="form-container" style="max-width: 850px; margin: auto; padding: 24px; background-color: #ffffff; border: 2px solid #ccc; border-radius: 12px; font-family: Tahoma, sans-serif; font-size: 13px;">
-    <!-- Content truncated for brevity, assumed to be complete -->
-    <script src="script.js"></script>
-  </div>
-</body>
-
-</html>
+  // Gắn listener trực tiếp vào các input ngày
+  const dateInputs = document.querySelectorAll('input[type="date"]');
+  dateInputs.forEach(input => {
+    input.addEventListener('change', () => {
+      calculateDays();
+    });
+  });
+});
