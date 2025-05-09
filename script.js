@@ -1,5 +1,3 @@
-# Update the script.js content to include both `input` and `change` event listeners
-updated_script = """
 function updateCompanyInfo(value) {
   const logoMap = {
     swensens: 'logo-swensens.png',
@@ -77,11 +75,3 @@ window.addEventListener('DOMContentLoaded', () => {
   calculateDays();
   calculateCosts();
 });
-"""
-
-# Save the updated script to file
-script_path = "/mnt/data/script.js"
-with open(script_path, "w", encoding="utf-8") as file:
-    file.write(updated_script.strip())
-
-script_path
