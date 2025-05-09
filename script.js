@@ -27,8 +27,8 @@ function calculateDays() {
   const routes = document.querySelectorAll('.route');
   let totalDays = 0;
   routes.forEach(route => {
-    const start = route.querySelector('[name^="depart-"]');
-    const end = route.querySelector('[name^="return-"]');
+    const start = route.querySelector('input[name*="depart"]');
+    const end = route.querySelector('input[name*="return"]');
     const dayBox = route.querySelector('.day-count');
     if (start && end && start.value && end.value) {
       const startDate = new Date(start.value);
@@ -63,7 +63,7 @@ function calculateCosts() {
   document.getElementById('total-cost').innerText = total.toLocaleString('vi-VN');
 }
 
-// Event listeners
+// Listen to input and change events
 ['input', 'change'].forEach(event =>
   document.addEventListener(event, () => {
     calculateDays();
