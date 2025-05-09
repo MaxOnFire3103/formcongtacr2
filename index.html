@@ -32,11 +32,13 @@
       <label>Mục Đích:</label>
       <input type="text" name="purpose" required>
 
-      <label>Loại công tác:</label>
-      <select name="work-type" required>
-        <option value="short-term">Công tác ngắn ngày</option>
-        <option value="long-term">Công tác dài ngày</option>
-      </select>
+      <div class="form-grid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px; align-items:center;">
+  <label style="grid-column: span 1;">Loại công tác:</label>
+  <select style="grid-column: span 2;" name="work-type" required>
+    <option value="short-term">Công tác ngắn ngày</option>
+    <option value="long-term">Công tác dài ngày</option>
+  </select>
+</div>
 
       <h3 style="margin-top: 24px; color: #2e7d32;">Kế Hoạch Công Tác</h3>
       <div id="routes">
