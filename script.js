@@ -23,6 +23,7 @@ function updateCompanyInfo(value) {
 }
 
 function calculateDays() {
+  console.log('🔄 Running calculateDays()...');
   const routes = document.querySelectorAll('.route');
   let totalDays = 0;
   routes.forEach(route => {
@@ -34,6 +35,7 @@ function calculateDays() {
       const endDate = new Date(end.value);
       const diffTime = endDate - startDate;
       const days = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+      console.log(`🗓️ ${start.value} → ${end.value} = ${days} ngày`);
       if (days > 0 && dayBox) {
         dayBox.value = days;
         totalDays += days;
@@ -61,15 +63,13 @@ function calculateCosts() {
   document.getElementById('total-cost').innerText = total.toLocaleString('vi-VN');
 }
 
-document.addEventListener('input', () => {
-  calculateDays();
-  calculateCosts();
-});
-
-document.addEventListener('change', () => {
-  calculateDays();
-  calculateCosts();
-});
+// Event listeners
+['input', 'change'].forEach(event =>
+  document.addEventListener(event, () => {
+    calculateDays();
+    calculateCosts();
+  })
+);
 
 window.addEventListener('DOMContentLoaded', () => {
   calculateDays();
