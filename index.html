@@ -1,26 +1,29 @@
 <body>
-  <div class="form-container">
-    <h2>CÔNG TY CỔ PHẦN KEM AN MINH</h2>
-    <h3>Mẫu số: HR_QDCT 2023_01</h3>
-    <h4>QUYẾT ĐỊNH CÔNG TÁC</h4>
+  <div class="form-container" style="max-width: 850px; margin: auto; padding: 24px; background-color: #f1f8f4; border: 2px dashed #4caf50; border-radius: 8px; font-family: Tahoma, sans-serif; font-size: 13px;">
+    <h2 style="text-align:center; color:#2e7d32; margin-bottom: 8px;">CÔNG TY CỔ PHẦN KEM AN MINH</h2>
+    <h3 style="text-align:center; font-weight:bold; margin: 4px 0;">Mẫu số: HR_QDCT 2023_01</h3>
+    <h4 style="text-align:center; font-weight:bold; color:#2e7d32; margin-bottom: 16px;">QUYẾT ĐỊNH CÔNG TÁC</h4>
 
     <form id="work-form">
-      <div class="form-grid">
-        <label>Mã Nhân Viên:</label>
-        <input type="text" name="employee-id" required>
-        <label>Bộ Phận:</label>
-        <input type="text" name="department" required>
-        <label>Chức Vụ:</label>
-        <input type="text" name="position" required>
+      <div class="form-grid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px; align-items:center;">
+        <label style="grid-column: span 1;">Mã Nhân Viên:</label>
+        <input style="grid-column: span 2;" type="text" name="employee-id" required>
+        <label style="grid-column: span 1;">Bộ Phận:</label>
+        <input style="grid-column: span 2;" type="text" name="department" required>
       </div>
 
-      <div class="form-grid">
-        <label>Người Đề Nghị:</label>
-        <input type="text" name="requester" required>
-        <label>Email:</label>
-        <input type="email" name="email" required>
-        <label>Ngày Đề Nghị:</label>
-        <input type="date" name="request-date" required>
+      <div class="form-grid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px; align-items:center;">
+        <label style="grid-column: span 1;">Chức Vụ:</label>
+        <input style="grid-column: span 2;" type="text" name="position" required>
+        <label style="grid-column: span 1;">Người Đề Nghị:</label>
+        <input style="grid-column: span 2;" type="text" name="requester" required>
+      </div>
+
+      <div class="form-grid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px; align-items:center;">
+        <label style="grid-column: span 1;">Email:</label>
+        <input style="grid-column: span 2;" type="email" name="email" required>
+        <label style="grid-column: span 1;">Ngày Đề Nghị:</label>
+        <input style="grid-column: span 2;" type="date" name="request-date" required>
       </div>
 
       <label>Email Người Duyệt (cách nhau bởi dấu ','):</label>
@@ -35,20 +38,20 @@
         <option value="long-term">Công tác dài ngày</option>
       </select>
 
-      <h3>Kế Hoạch Công Tác</h3>
+      <h3 style="margin-top: 24px; color: #2e7d32;">Kế Hoạch Công Tác</h3>
       <div id="routes">
-        <div class="route">
-          <h4>Lộ trình 1</h4>
-          <div class="route-grid">
+        <div class="route" style="background-color: #e6f4ea; border: 1.5px dashed #4caf50; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+          <h4 style="margin-bottom: 10px; color:#2e7d32;">Lộ trình 1</h4>
+          <div class="route-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; align-items: center;">
             <label>Lộ trình:</label>
-            <select name="route-name-1" required>
+            <select name="route-name-1" required style="grid-column: span 2;">
               <option value="Bac Ninh - HAN">Bac Ninh - HAN</option>
               <option value="Da Nang - SGN">Da Nang - SGN</option>
               <option value="HCM - Ha Long">HCM - Ha Long</option>
             </select>
 
             <label>Phương tiện:</label>
-            <select name="transport-1" required>
+            <select name="transport-1" required style="grid-column: span 2;">
               <option value="Xe khách">Xe khách</option>
               <option value="Máy bay">Máy bay</option>
               <option value="Tàu hỏa">Tàu hỏa</option>
@@ -73,42 +76,42 @@
         </div>
       </div>
 
-      <button type="button" id="add-route">Thêm Lộ Trình</button>
+      <button type="button" id="add-route" style="margin-bottom: 16px;">Thêm Lộ Trình</button>
 
       <label>Yêu cầu khác:</label>
-      <textarea name="other-request" rows="3"></textarea>
+      <textarea name="other-request" rows="3" style="width: 100%;"></textarea>
 
-      <h4>Tổng số ngày công tác: <span id="total-days">0</span> ngày</h4>
+      <h4 style="margin-top: 20px;">Tổng số ngày công tác: <span id="total-days">0</span> ngày</h4>
 
-      <h3>Chi Phí Dự Kiến</h3>
-      <div class="cost-section">
+      <h3 style="margin-top: 24px; color: #2e7d32;">Chi Phí Dự Kiến</h3>
+      <div class="cost-section" style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:10px; align-items:center; margin-bottom:10px;">
         <label>Giá vé phương tiện 1</label>
         <input type="number" value="1" data-role="qty">
         <input type="number" value="230000" data-role="price">
         <input type="number" value="230000" data-role="subtotal" disabled>
       </div>
-      <div class="cost-section">
+      <div class="cost-section" style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:10px; align-items:center; margin-bottom:10px;">
         <label>Khách sạn</label>
         <input type="number" value="0" data-role="qty">
         <input type="number" value="0" data-role="price">
         <input type="number" value="0" data-role="subtotal" disabled>
       </div>
-      <div class="cost-section">
+      <div class="cost-section" style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:10px; align-items:center; margin-bottom:10px;">
         <label>Phụ cấp công tác phí</label>
         <input type="number" value="0" data-role="qty">
         <input type="number" value="0" data-role="price">
         <input type="number" value="0" data-role="subtotal" disabled>
       </div>
-      <div class="cost-section">
+      <div class="cost-section" style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:10px; align-items:center; margin-bottom:10px;">
         <label>Chi phí khác</label>
         <input type="number" value="0" data-role="qty">
         <input type="number" value="0" data-role="price">
         <input type="number" value="0" data-role="subtotal" disabled>
       </div>
 
-      <h4>Tổng Chi Phí Dự Kiến: <span id="total-cost">0</span> VNĐ</h4>
+      <h4 style="margin-top: 12px;">Tổng Chi Phí Dự Kiến: <span id="total-cost">0</span> VNĐ</h4>
 
-      <button type="submit">Gửi</button>
+      <button type="submit" style="margin-top: 16px;">Gửi</button>
     </form>
   </div>
 </body>
